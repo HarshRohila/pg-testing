@@ -1,12 +1,12 @@
 import { client } from "./db"
-import { ProcedureTester } from "./lib"
+import { dbTestEnv } from "./lib"
 import { describe, it, expect } from "bun:test"
 
 describe("upsert_user", () => {
   it("works", async () => {
     expect.assertions(2)
 
-    await ProcedureTester(client, async () => {
+    await dbTestEnv(client, async () => {
       async function insertUserWorks() {
         await client.query(`CALL upsert_user(25, 'Bob')`)
 
